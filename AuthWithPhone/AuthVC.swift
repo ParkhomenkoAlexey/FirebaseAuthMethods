@@ -8,17 +8,36 @@
 
 import UIKit
 import FirebaseAuth
+import GoogleSignIn
 
 class AuthVC: UIViewController {
 
     @IBAction func closeSegue(_ sender: UIStoryboardSegue) {
         
     }
+    @IBAction func googleTapped(_ sender: Any) {
+        print(#function)
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+        GIDSignIn.sharedInstance().signIn()
+    }
+    
+    @IBAction func facebookTapped(_ sender: Any) {
+        print(#function)
+    }
+    
+    @IBAction func appleIDTapped(_ sender: Any) {
+        print(#function)
+    }
     
     @IBAction func authTapped() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let dvc = storyboard.instantiateViewController(withIdentifier: "PhoneNumberVC") as! PhoneNumberVC
         self.present(dvc, animated: true)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        GIDSignIn.sharedInstance()?.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,3 +54,16 @@ class AuthVC: UIViewController {
     
 }
 
+// MARK: - GIDSignInDelegate
+extension AuthVC: GIDSignInDelegate {
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        AuthService.shared.googleLogin(user: user, error: error) { (result) in
+            switch result {
+            case .success(let user):
+                print("user: ", user)
+            case .failure(let error):
+                self.showAlert(with: "Ошибка", and: error.localizedDescription)
+            }
+        }
+    }
+}

@@ -17,6 +17,10 @@
 		5203FED1245C307F00F3FDC7 /* CodeValidVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5203FED0245C307F00F3FDC7 /* CodeValidVC.swift */; };
 		5203FED3245C308E00F3FDC7 /* ContentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5203FED2245C308E00F3FDC7 /* ContentVC.swift */; };
 		ADFF49A09547467CBD1D83A7 /* Pods_AuthWithPhone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3045CAEAD49531735BD7EB62 /* Pods_AuthWithPhone.framework */; };
+		AE37BD762615EED8002CA752 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE37BD752615EED8002CA752 /* AuthService.swift */; };
+		AE37BD792615EEF4002CA752 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE37BD782615EEF4002CA752 /* AuthError.swift */; };
+		AE37BD7C2615EF16002CA752 /* Validators.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE37BD7B2615EF16002CA752 /* Validators.swift */; };
+		AE37BD822615EFED002CA752 /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE37BD812615EFED002CA752 /* UIViewController + Extension.swift */; };
 		AE4544312615E455004E45E0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE4544302615E455004E45E0 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +38,10 @@
 		5203FED0245C307F00F3FDC7 /* CodeValidVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeValidVC.swift; sourceTree = "<group>"; };
 		5203FED2245C308E00F3FDC7 /* ContentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentVC.swift; sourceTree = "<group>"; };
 		86BEFCE138A2AEA5C027A420 /* Pods-AuthWithPhone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AuthWithPhone.release.xcconfig"; path = "Pods/Target Support Files/Pods-AuthWithPhone/Pods-AuthWithPhone.release.xcconfig"; sourceTree = "<group>"; };
+		AE37BD752615EED8002CA752 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		AE37BD782615EEF4002CA752 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
+		AE37BD7B2615EF16002CA752 /* Validators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validators.swift; sourceTree = "<group>"; };
+		AE37BD812615EFED002CA752 /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 		AE4544302615E455004E45E0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CCAC39D3E678256A5A2DC36F /* Pods-AuthWithPhone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AuthWithPhone.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AuthWithPhone/Pods-AuthWithPhone.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,6 +89,7 @@
 			children = (
 				5203FEB6245C2C8300F3FDC7 /* AppDelegate.swift */,
 				5203FEB8245C2C8300F3FDC7 /* SceneDelegate.swift */,
+				AE37BD7E2615EF1D002CA752 /* Auth */,
 				5203FECC245C306E00F3FDC7 /* AuthVC.swift */,
 				5203FECE245C307700F3FDC7 /* PhoneNumberVC.swift */,
 				5203FED0245C307F00F3FDC7 /* CodeValidVC.swift */,
@@ -103,6 +112,17 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		AE37BD7E2615EF1D002CA752 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				AE37BD752615EED8002CA752 /* AuthService.swift */,
+				AE37BD782615EEF4002CA752 /* AuthError.swift */,
+				AE37BD7B2615EF16002CA752 /* Validators.swift */,
+				AE37BD812615EFED002CA752 /* UIViewController + Extension.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -115,6 +135,7 @@
 				5203FEB0245C2C8300F3FDC7 /* Frameworks */,
 				5203FEB1245C2C8300F3FDC7 /* Resources */,
 				DC1E020464BC20602D5C91DC /* [CP] Embed Pods Frameworks */,
+				94078A1F10054DDE4FAE7B07 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -195,6 +216,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		94078A1F10054DDE4FAE7B07 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AuthWithPhone/Pods-AuthWithPhone-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AuthWithPhone/Pods-AuthWithPhone-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AuthWithPhone/Pods-AuthWithPhone-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		DC1E020464BC20602D5C91DC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -225,6 +263,10 @@
 				5203FED1245C307F00F3FDC7 /* CodeValidVC.swift in Sources */,
 				5203FECF245C307700F3FDC7 /* PhoneNumberVC.swift in Sources */,
 				5203FEB9245C2C8300F3FDC7 /* SceneDelegate.swift in Sources */,
+				AE37BD822615EFED002CA752 /* UIViewController + Extension.swift in Sources */,
+				AE37BD792615EEF4002CA752 /* AuthError.swift in Sources */,
+				AE37BD762615EED8002CA752 /* AuthService.swift in Sources */,
+				AE37BD7C2615EF16002CA752 /* Validators.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

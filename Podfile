@@ -10,5 +10,6 @@ target 'AuthWithPhone' do
    pod "FlagPhoneNumber"
    pod "Firebase"
    pod "Firebase\Auth"
+   pod 'GoogleSignIn'
 
 end

@@ -32,6 +32,10 @@ class AuthService {
         }
     }
     
+    func facebookLogin() {
+        
+    }
+    
     func googleLogin(user: GIDGoogleUser!, error: Error!, completion: @escaping (Result<User, Error>) -> Void) {
         if let error = error {
             completion(.failure(error))

@@ -49,16 +49,12 @@
                                 <rect key="frame" x="16" y="575" width="382" height="60"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="ZKH-VT-9X0"/>
                                     <constraint firstAttribute="height" constant="60" id="pUe-Nv-fLI"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <state key="normal" title="Facebook">
                                     <color key="titleColor" systemColor="labelColor"/>
                                 </state>
-                                <connections>
-                                    <action selector="facebookTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tru-fJ-Tg6"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z5z-XF-HyO">
                                 <rect key="frame" x="16" y="651" width="382" height="60"/>
@@ -72,9 +68,6 @@
                                 <state key="normal" title="Apple ID">
                                     <color key="titleColor" systemColor="labelColor"/>
                                 </state>
-                                <connections>
-                                    <action selector="appleIDTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="app-Cg-5bc"/>
-                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

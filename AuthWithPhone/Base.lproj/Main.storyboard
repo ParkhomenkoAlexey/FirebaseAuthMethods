@@ -55,6 +55,9 @@
                                 <state key="normal" title="Facebook">
                                     <color key="titleColor" systemColor="labelColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="facebookTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TUz-8j-cs0"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z5z-XF-HyO">
                                 <rect key="frame" x="16" y="651" width="382" height="60"/>
@@ -68,6 +71,9 @@
                                 <state key="normal" title="Apple ID">
                                     <color key="titleColor" systemColor="labelColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="appleIDTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vUB-eM-ldj"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

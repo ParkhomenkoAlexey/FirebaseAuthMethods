@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseAuth
 import GoogleSignIn
+import FBSDKLoginKit
 
 class AuthVC: UIViewController {
 
@@ -23,10 +24,29 @@ class AuthVC: UIViewController {
     
     @IBAction func facebookTapped(_ sender: Any) {
         print(#function)
+        AuthService.shared.facebookLogin(from: self) { (result) in
+            switch result {
+            
+            case .success(let user):
+                print("user: ", user)
+                print("user.email ", user.email)
+            case .failure(let error):
+                self.showAlert(with: "Ошибка", and: error.localizedDescription)
+            }
+        }
     }
     
     @IBAction func appleIDTapped(_ sender: Any) {
         print(#function)
+        AuthService.shared.appleIDLogin { (result) in
+            switch result {
+            
+            case .success(let user):
+                break
+            case .failure(let error):
+                self.showAlert(with: "Ошибка", and: error.localizedDescription)
+            }
+        }
     }
     
     @IBAction func authTapped() {
@@ -51,7 +71,6 @@ class AuthVC: UIViewController {
             }
         }
     }
-    
 }
 
 // MARK: - GIDSignInDelegate
@@ -61,6 +80,7 @@ extension AuthVC: GIDSignInDelegate {
             switch result {
             case .success(let user):
                 print("user: ", user)
+                print("user.email ", user.email)
             case .failure(let error):
                 self.showAlert(with: "Ошибка", and: error.localizedDescription)
             }

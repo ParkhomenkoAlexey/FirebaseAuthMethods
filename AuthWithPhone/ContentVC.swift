@@ -13,12 +13,8 @@ class ContentVC: UIViewController {
     
     @IBAction func logOut(_ sender: UIButton) {
         
-        do {
-            try Auth.auth().signOut()
-            performSegue(withIdentifier: "closeSegue", sender: self)
-        } catch {
-            
-        }
+        AuthService.shared.logOut()
+        performSegue(withIdentifier: "closeSegue", sender: self)
     }
     
 }

@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>58433086172-468ongvh8o1tfglrab217p88dfk4be5s.apps.googleusercontent.com</string>
+	<string>58433086172-icqo7ges78f3vtgouepn3as4p63m9d6p.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.58433086172-468ongvh8o1tfglrab217p88dfk4be5s</string>
+	<string>com.googleusercontent.apps.58433086172-icqo7ges78f3vtgouepn3as4p63m9d6p</string>
 	<key>API_KEY</key>
 	<string>AIzaSyAop-Nie_TlGJNS4IIS2CFHNM_ewEV-R5k</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>authWithPhone.AuthWithPhone</string>
+	<string>alexey.authWithPhone.AuthWithPhone</string>
 	<key>PROJECT_ID</key>
 	<string>authappphone</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:58433086172:ios:f4d0dc06c75e88c5ca8a19</string>
+	<string>1:58433086172:ios:db634109f0b4d38fca8a19</string>
 </dict>
 </plist>

@@ -11,12 +11,16 @@ import Firebase
 import FirebaseAuth
 import GoogleSignIn
 import FBSDKLoginKit
+import AuthenticationServices
+import CryptoKit
 
 class AuthService {
     
     static let shared = AuthService()
-    private let loginManager = LoginManager()
-    
+    private let loginManager = LoginManager() // fb
+    private var currentNonce: String? // appleID
+
+// MARK: - Phone Auth
     func login(email: String?, password: String?, completion: @escaping (Result<User, Error>) -> Void) {
         
         guard let email = email, let password = password else {
@@ -33,6 +37,7 @@ class AuthService {
         }
     }
     
+// MARK: - Google Auth
     func googleLogin(user: GIDGoogleUser!, error: Error!, completion: @escaping (Result<User, Error>) -> Void) {
         if let error = error {
             completion(.failure(error))
@@ -50,6 +55,7 @@ class AuthService {
         }
     }
     
+// MARK: - Facebook Auth
     func facebookLogin(from: UIViewController, completion: @escaping (Result<User, Error>) -> Void) {
         
         if let _ = AccessToken.current {
@@ -104,10 +110,127 @@ class AuthService {
         }
     }
     
-    func appleIDLogin(completion: @escaping (Result<User, Error>) -> Void) {
+// MARK: - Apple ID Auth
+    enum AppleIDError: Error {
+        case credentialError
+        case nonceError
+        case tokenError
+        case tokenStringError(String)
+        case error(Error)
+        
+        var description: String {
+            switch self {
+            case .credentialError:
+                return "credentialError"
+            case .nonceError:
+                return "Invalid state: A login callback was received, but no login request was send"
+            case .error(let error):
+                return error.localizedDescription
+            case .tokenError:
+                return "Unable to fetch identity token"
+            case .tokenStringError(let tokenDebugDescription):
+                return "Unable to serialize token string from data: \(tokenDebugDescription)"
+            }
+        }
+    }
+    
+    func appleIDLogin(authorization: ASAuthorization!, completion: @escaping (Result<User, AppleIDError>) -> Void) {
+        guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else {
+            completion(.failure(.credentialError))
+            return
+        }
+        guard let nonce = currentNonce else {
+            completion(.failure(.nonceError))
+            return }
+        guard let appleIDToken = appleIDCredential.identityToken else {
+            completion(.failure(.tokenError))
+            return
+        }
+        guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
+            completion(.failure(.tokenStringError(appleIDToken.debugDescription)))
+            return
+        }
+        
+        let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: idTokenString, rawNonce: nonce)
+        
+        Auth.auth().signIn(with: credential) { (result, error) in
+            guard let result = result else {
+                completion(.failure(.error(error!)))
+                return
+            }
+            completion(.success(result.user))
+        }
         
     }
+    
+    typealias AppleIdEntity = UIViewController & ASAuthorizationControllerDelegate & ASAuthorizationControllerPresentationContextProviding
+    
+    func presentingAppleIDViewCOntroller<T: AppleIdEntity>(from: T) {
+        let request = createAppleIDRequest()
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        
+        authorizationController.delegate = from
+        authorizationController.presentationContextProvider = from
+        
+        authorizationController.performRequests()
+    }
+    
+    private func createAppleIDRequest() -> ASAuthorizationAppleIDRequest {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        let nonce = randomNonceString()
+        request.nonce = sha256(nonce)
+        currentNonce = nonce
+        return request
+    }
+    
+    // Adapted from https://auth0.com/docs/api-auth/tutorials/nonce#generate-a-cryptographically-random-nonce
+    private func randomNonceString(length: Int = 32) -> String {
+      precondition(length > 0)
+      let charset: Array<Character> =
+          Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+      var result = ""
+      var remainingLength = length
 
+      while remainingLength > 0 {
+        let randoms: [UInt8] = (0 ..< 16).map { _ in
+          var random: UInt8 = 0
+          let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
+          if errorCode != errSecSuccess {
+            fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
+          }
+          return random
+        }
+
+        randoms.forEach { random in
+          if remainingLength == 0 {
+            return
+          }
+
+          if random < charset.count {
+            result.append(charset[Int(random)])
+            remainingLength -= 1
+          }
+        }
+      }
+
+      return result
+    }
+
+    @available(iOS 13, *)
+    private func sha256(_ input: String) -> String {
+      let inputData = Data(input.utf8)
+      let hashedData = SHA256.hash(data: inputData)
+      let hashString = hashedData.compactMap {
+        return String(format: "%02x", $0)
+      }.joined()
+
+      return hashString
+    }
+
+// MARK: - Email Auth
     func register(email: String?, password: String?, confirmPassword: String?, completion: @escaping (Result<User, Error>) -> Void) {
         
         guard Validators.isFilled(email: email, password: password, confirmPassword: confirmPassword) else {
@@ -133,7 +256,8 @@ class AuthService {
             completion(.success(result.user))
         }
     }
-    
+
+// MARK: - LogOut
     func logOut() {
         
         if let _ = AccessToken.current {

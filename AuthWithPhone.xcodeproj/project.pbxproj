@@ -21,7 +21,7 @@
 		AE37BD792615EEF4002CA752 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE37BD782615EEF4002CA752 /* AuthError.swift */; };
 		AE37BD7C2615EF16002CA752 /* Validators.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE37BD7B2615EF16002CA752 /* Validators.swift */; };
 		AE37BD822615EFED002CA752 /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE37BD812615EFED002CA752 /* UIViewController + Extension.swift */; };
-		AE4544312615E455004E45E0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE4544302615E455004E45E0 /* GoogleService-Info.plist */; };
+		AE37BDE526170C8D002CA752 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE37BDE426170C8D002CA752 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,7 +42,8 @@
 		AE37BD782615EEF4002CA752 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 		AE37BD7B2615EF16002CA752 /* Validators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validators.swift; sourceTree = "<group>"; };
 		AE37BD812615EFED002CA752 /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
-		AE4544302615E455004E45E0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AE37BDE026170C30002CA752 /* AuthWithPhone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AuthWithPhone.entitlements; sourceTree = "<group>"; };
+		AE37BDE426170C8D002CA752 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CCAC39D3E678256A5A2DC36F /* Pods-AuthWithPhone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AuthWithPhone.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AuthWithPhone/Pods-AuthWithPhone.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,6 +88,7 @@
 		5203FEB5245C2C8300F3FDC7 /* AuthWithPhone */ = {
 			isa = PBXGroup;
 			children = (
+				AE37BDE026170C30002CA752 /* AuthWithPhone.entitlements */,
 				5203FEB6245C2C8300F3FDC7 /* AppDelegate.swift */,
 				5203FEB8245C2C8300F3FDC7 /* SceneDelegate.swift */,
 				AE37BD7E2615EF1D002CA752 /* Auth */,
@@ -98,7 +100,7 @@
 				5203FEBF245C2C8600F3FDC7 /* Assets.xcassets */,
 				5203FEC1245C2C8600F3FDC7 /* LaunchScreen.storyboard */,
 				5203FEC4245C2C8600F3FDC7 /* Info.plist */,
-				AE4544302615E455004E45E0 /* GoogleService-Info.plist */,
+				AE37BDE426170C8D002CA752 /* GoogleService-Info.plist */,
 			);
 			path = AuthWithPhone;
 			sourceTree = "<group>";
@@ -185,8 +187,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5203FEC3245C2C8600F3FDC7 /* LaunchScreen.storyboard in Resources */,
-				AE4544312615E455004E45E0 /* GoogleService-Info.plist in Resources */,
 				5203FEC0245C2C8600F3FDC7 /* Assets.xcassets in Resources */,
+				AE37BDE526170C8D002CA752 /* GoogleService-Info.plist in Resources */,
 				5203FEBE245C2C8300F3FDC7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -411,6 +413,7 @@
 			baseConfigurationReference = CCAC39D3E678256A5A2DC36F /* Pods-AuthWithPhone.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AuthWithPhone/AuthWithPhone.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TSZQ4D456H;
 				INFOPLIST_FILE = AuthWithPhone/Info.plist;
@@ -419,7 +422,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = authWithPhone.AuthWithPhone;
+				PRODUCT_BUNDLE_IDENTIFIER = alexey.authWithPhone.AuthWithPhone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -431,6 +434,7 @@
 			baseConfigurationReference = 86BEFCE138A2AEA5C027A420 /* Pods-AuthWithPhone.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AuthWithPhone/AuthWithPhone.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TSZQ4D456H;
 				INFOPLIST_FILE = AuthWithPhone/Info.plist;
@@ -439,7 +443,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = authWithPhone.AuthWithPhone;
+				PRODUCT_BUNDLE_IDENTIFIER = alexey.authWithPhone.AuthWithPhone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

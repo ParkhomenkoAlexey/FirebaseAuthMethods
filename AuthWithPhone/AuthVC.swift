@@ -10,6 +10,7 @@ import UIKit
 import FirebaseAuth
 import GoogleSignIn
 import FBSDKLoginKit
+import AuthenticationServices
 
 class AuthVC: UIViewController {
 
@@ -38,15 +39,7 @@ class AuthVC: UIViewController {
     
     @IBAction func appleIDTapped(_ sender: Any) {
         print(#function)
-        AuthService.shared.appleIDLogin { (result) in
-            switch result {
-            
-            case .success(let user):
-                break
-            case .failure(let error):
-                self.showAlert(with: "Ошибка", and: error.localizedDescription)
-            }
-        }
+        AuthService.shared.presentingAppleIDViewCOntroller(from: self)
     }
     
     @IBAction func authTapped() {
@@ -85,5 +78,27 @@ extension AuthVC: GIDSignInDelegate {
                 self.showAlert(with: "Ошибка", and: error.localizedDescription)
             }
         }
+    }
+}
+
+// MARK: - ASAuthorizationControllerDelegate
+extension AuthVC: ASAuthorizationControllerDelegate {
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        AuthService.shared.appleIDLogin(authorization: authorization) { (result) in
+            switch result {
+            case .success(let user):
+                print("user: ", user)
+                print("user.email ", user.email)
+            case .failure(let error):
+                self.showAlert(with: "Ошибка", and: error.localizedDescription)
+            }
+        }
+    }
+}
+
+// MARK: - ASAuthorizationControllerPresentationContextProviding
+extension AuthVC: ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
     }
 }
